@@ -1,0 +1,9 @@
+<!--form_for(from_data, action, options \\ [] , fun) ：フォームタグを生成，updateに送信-->
+<%= form_for @changeset, Routes.topic_path(@conn, :update, @topic), fn f -> %>
+    <div class="form-group">
+        <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
+        <%= error_tag f, :title %>
+    </div>
+
+    <%= submit "Save Topic", class: "btn btn-primary" %>
+<% end %>

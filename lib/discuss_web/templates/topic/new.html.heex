@@ -1,0 +1,13 @@
+<%= form_for @changeset, Routes.topic_path(@conn, :create), fn f -> %>
+    <div class="form-group">
+        <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
+        <%= error_tag f, :title %>
+    </div>
+
+    <%= submit "Save Topic", class: "btn btn-primary" %>
+<% end %>
+
+<!--form_for(@changeset, Routes.topic_path(@conn, :create)【送信先：topic_pathに関連付けられたcreate関数】, fn f -> end)-->
+
+<!--　匿名関数 -->
+    <!-- sum = fn(a,b) -> a + b end -->
