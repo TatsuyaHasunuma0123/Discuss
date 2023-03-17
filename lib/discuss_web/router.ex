@@ -2,7 +2,6 @@ defmodule DiscussWeb.Router do
   use DiscussWeb, :router
 
   pipeline :browser do
-    plug Ueberauth
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
@@ -13,10 +12,6 @@ defmodule DiscussWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-  end
-
-  pipeline :secured do
-    plug DiscussWeb.AuthController
   end
 
   scope "/", DiscussWeb do
@@ -34,7 +29,7 @@ defmodule DiscussWeb.Router do
   end
 
   scope "/auth", DiscussWeb do
-    pipe_through [:browser, :secured]
+    pipe_through :browser
 
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback

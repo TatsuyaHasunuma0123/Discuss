@@ -1,14 +1,10 @@
 defmodule DiscussWeb.AuthController do
   use DiscussWeb, :controller
+
   # router.exにあるplug
   # mix.exs,configに追加でコードを書いている
-  plug  Ueberauth
 
-  def request(conn, params) do
-    IO.puts "+++++++++++"
-    IO.inspect(conn.assigns)
-    IO.puts "+++++++++++"
-    IO.inspect(params)
+  def request(_conn, _params) do
     IO.puts "+++++++++++"
   end
 
@@ -19,5 +15,4 @@ defmodule DiscussWeb.AuthController do
     IO.inspect(params)
     IO.puts "+++++++++++"
   end
-
 end
