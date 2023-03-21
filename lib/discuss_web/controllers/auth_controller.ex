@@ -1,18 +1,55 @@
 defmodule DiscussWeb.AuthController do
   use DiscussWeb, :controller
+  alias DiscussWeb.User
+  alias Discuss.Repo
+  plug Ueberauth
 
-  # router.exにあるplug
-  # mix.exs,configに追加でコードを書いている
+  def callback(%{assigns: %{ueberauth_auth: auth}} = conn,  _params) do
+    user_params = %{token: auth.credentials.token,
+                    email: auth.info.email,
+                    provider: "github"}
+    changeset  = User.changeset(%User{}, user_params)
 
-  def request(_conn, _params) do
-    IO.puts "+++++++++++"
+    signin(conn, changeset)
   end
 
-  def callback(conn, params) do
-    IO.puts "+++++++++++"
-    IO.inspect(conn.assigns)
-    IO.puts "+++++++++++"
-    IO.inspect(params)
-    IO.puts "+++++++++++"
+
+  #     @spec configure_session(t(), Keyword.t()) :: t()
+  # Configures the session.
+
+  # Options
+  # :renew - When true, generates a new session id for the cookie
+  # :drop - When true, drops the session, a session cookie will not be included in the response
+  # :ignore - When true, ignores all changes made to the session in this request cycle
+  def signout(conn, _params) do
+    conn
+    |> configure_session(drop: true)
+    |> redirect(to: Routes.topic_path(conn, :index))
+  end
+
+  defp signin(conn, changeset) do
+    case insert_or_update_user(changeset) do
+      {:ok, user} ->
+        conn
+        |> put_flash(:info, "Welcome back!")
+        |> put_session(:user_id, user.id)
+        |> redirect(to: Routes.topic_path(conn, :index))
+      {:error, _reason} ->
+        conn
+        |> put_flash(:error, "Error Signing In")
+        |> redirect(to: Routes.topic_path(conn, :index))
+    end
+  end
+
+  # ユーザがすでにログインしているかを確認
+  defp insert_or_update_user(changeset) do
+    # get_by(検索したいテーブルのモジュール，検索条件)
+    # 合：それを返す　否：nil　
+    case Repo.get_by(User, email: changeset.changes.email) do
+      nil ->
+        Repo.insert(changeset) #戻り値は 1.{:ok,user}　2.{:error,reason}
+      user ->
+        {:ok, user}
+    end
   end
 end

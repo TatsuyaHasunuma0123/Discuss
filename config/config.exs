@@ -59,10 +59,10 @@ config :ueberauth, Ueberauth,
 
   #System.get_env 引数：環境変数名
   # GITのリポジトリにばれないようにするために別ファイルを作る
-# config :ueberauth, Ueberauth.Strategy.Github.OAuth,
-#   client_id: "b12f8ad00a40dd967cbf",
-#   client_secret: "64fdd42cc09685fbbd485520bfdc6c9c54230139"
+config :ueberauth, Ueberauth.Strategy.Github.OAuth,
+  client_id: "b12f8ad00a40dd967cbf",
+  client_secret: "64fdd42cc09685fbbd485520bfdc6c9c54230139"
 
-  config :ueberauth, Ueberauth.Strategy.Github.OAuth,
-  client_id: System.get_env("GITHUB_CLIENT_ID"),
-  client_secret: System.get_env("GITHUB_CLIENT_SECRET")
+  # config :ueberauth, Ueberauth.Strategy.Github.OAuth,
+  # client_id: System.get_env("GITHUB_CLIENT_ID"),
+  # client_secret: System.get_env("GITHUB_CLIENT_SECRET")

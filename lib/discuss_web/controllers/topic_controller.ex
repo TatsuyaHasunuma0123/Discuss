@@ -27,7 +27,12 @@
   alias DiscussWeb.Topic
   alias Discuss.Repo
 
+  #[]内の関数の際にplugを実行
+  plug DiscussWeb.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete]
+
+
   def index(conn, _params) do
+    IO.inspect(conn.assigns)
     # detaを全て追加
     topics = Repo.all(Topic)
     render conn, "index.html", topics: topics
