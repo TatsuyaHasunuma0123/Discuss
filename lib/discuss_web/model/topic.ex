@@ -5,6 +5,7 @@ defmodule DiscussWeb.Topic do
   # Topicsがデータベース内部でどう見えるか
   schema "topics" do
     field :title, :string
+    belongs_to :user, DiscussWeb.User
   end
 
   #データの整合性を検証
