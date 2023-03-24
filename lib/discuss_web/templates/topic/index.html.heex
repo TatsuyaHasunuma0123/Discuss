@@ -3,16 +3,15 @@
 <ul class="collection">
     <%= for topic <- @topics do %>
         <li class="collection-item">
-            <%= topic.title %>
-            <%= topic.id %>
+            <%= link topic.title, to: Routes.topic_path(@conn, :show, topic) %>
 
-            <%= if @conn.assigns.user.id == topic.user_id do %>
+            <!--%= if @conn.assigns.user.id == topic.user_id do % -->
                 <div class="right">
                     <%= link "Edit", to: Routes.topic_path(@conn, :edit, topic) %>
                     <%= link "Delete", to: Routes.topic_path(@conn, :delete, topic), method: :delete %>
                     <!-- method はリクエストの指定。デフォルトではURLにリクエストを送る-->
                 </div>
-            <% end %>
+            <!--% end % -->
         </li>
     <% end %>
 </ul>

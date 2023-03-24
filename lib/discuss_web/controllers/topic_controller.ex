@@ -38,6 +38,11 @@
     render conn, "index.html", topics: topics
   end
 
+  def show(conn, %{"id" => topic_id}) do
+    topic = Repo.get!(Topic, topic_id)
+    render conn, "show.html", topic: topic
+  end
+
   def new(conn, _params) do
     changeset = Topic.changeset(%Topic{},%{})
 
@@ -106,7 +111,7 @@
   def check_topic_owner(conn, _params) do
     %{params: %{"id" => topic_id}} = conn
 
-    if Repo.get(Topic.topic_id).user_id == conn.assigns.user.id do
+    if Repo.get(Topic, topic_id).user_id == conn.assigns.user.id do
       conn
     else
       conn
