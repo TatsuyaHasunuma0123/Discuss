@@ -10,7 +10,7 @@ defmodule DiscussWeb.UserSocket do
   # Uncomment the following line to define a "room:*" topic
   # pointing to the `DiscussWeb.RoomChannel`:
   #
-  # channel "room:*", DiscussWeb.RoomChannel
+  channel "comments:*", DiscussWeb.CommentsChannel
   #
   # To create a channel file, use the mix task:
   #
