@@ -1,9 +1,10 @@
 defmodule DiscussWeb.Comment do
-
   use DiscussWeb, :model
 
-  schema "comments" do
+  @derive {Jason.Encoder, only: [:content]}
+  # @dreive {Poison.Encoder, only: [:content]}
 
+  schema "comments" do
     field :content, :string
     belongs_to :user, DiscussWeb.User
     belongs_to :topic, DiscussWeb.Topic
