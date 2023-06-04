@@ -12,7 +12,8 @@
 ## My other portfolio is here .
 - 📝[Canvas](https://github.com/TatsuyaHasunuma0123/Canvas)
 - 🎵 [MusicPlayer](http://github.com/MusicPlayer)
-- 📆[Twitter Calender](https://github.com/TatsuyaHasunuma0123/Calendar)
+- 📆[Twitter Calender](https://github.com/TatsuyaHasunuma0123/TwitterCalendar)
+- 🗾[population_graph](https://github.com/TatsuyaHasunuma0123/population_graph)
 
 ## Usage
 
